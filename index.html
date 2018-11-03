@@ -1,0 +1,985 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>偏爱商城</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Specific Meta  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="http://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <![endif]-->
+    <!--  <script>
+    if (sessionStorage.userInfo && JSON.parse(sessionStorage.userInfo) && JSON.parse(sessionStorage.userInfo).isLogin) {} else {
+        location.assign('login.html')
+    }
+    </script>-->
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+                <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> 
+            <![endif]-->
+    <!-- header-start -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 hidden-xs">
+                        <div class="header-top-left">
+                            <div class="welcome-msg">
+                                <span class="default-msg hidden-xs">欢迎来到偏爱商城!</span>
+                                <span class="phone">qq: <span class="number">1833317387</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12 col-sm-12">
+                        <div class="header-top-right">
+                            <ul class="header-links hidden-xs">
+                                <li><a class="my-wishlist" href="#">收藏</a></li>
+                                <li>
+                                    <a class="login" href="#"></a>
+                                    <div class="logout">
+                                        <a onclick="sessionStorage.clear();location.assign('login.html');" href="#">退出</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 col-xs-8">
+                        <div class="logo">
+                            <a href="index.html"><img src="img/logo.png" alt="" /></a>
+                            <h2>偏爱商场</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-6 hidden-xs">
+                        <div class="search-box">
+                            <form action="#">
+                                <input class="form-control search-form" type="text" placeholder="搜索商品" />
+                                <button class="search-button" value="Search" type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-4 col-sm-6">
+                        <script id="cart_list" type="text/template">
+                            <a class="cart" href="#" title="购物车"><span class="hidden-xs">购物车 <br><small>{{list.data.length}} item(s) - ￥{{list.total}}</small></span></a>
+                            <div class="top-cart-content">
+                                {{if list.data.length}} {{each list.data value i}}
+                                <div class="media header-middle-checkout {{i == list.data.length - 1 ? 'last-child' : ''}}">
+                                    <div class="media-left check-imimg/cart/1.jpgg">
+                                        <a href="#"><img src="{{value.url}}" alt="" /></a>
+                                    </div>
+                                    <div class="media-body checkout-content">
+                                        <h4 class="media-heading">
+                                                    <span class="cart-count">{{value.count}}x</span>
+                                                    <a href="#">{{value.title}}</a>
+                                                    <span class="btn-remove checkout-remove" title="移除"><i class="fa fa-times" data-id={{value.id}} aria-hidden="true"></i></span>
+                                                </h4>
+                                        <p>￥{{value.price.toFixed(2)}}</p>
+                                    </div>
+                                </div>
+                                {{/each}} {{/if}}
+                                <div class="cart-total">
+                                    <span>总计</span>
+                                    <span><b>￥{{list.total.toFixed(2)}}</b></span>
+                                </div>
+                                {{if list.data.length}}
+                                    <a class="clearing"  data-toggle="modal" data-target="#myModalClearing">结算</a>
+                                {{/if}}
+                            </div>
+                        </script>
+                        <div id="cart" class="shopping-cart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-menu-area hidden-xs hidden-sm">
+            <div class="container">
+                <div class="row">
+                    <div class="colo-md-12">
+                        <div class="main-menu">
+                            <nav>
+                                <ul>
+                                    <li><a href="index.html">主页</a></li>
+                                    <li><a href="shop.html">商城</a></li>
+                                    <li><a href="contact.html">联系我们</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- mobile-menu-area-start -->
+        <div class="mobile-menu-area visible-xs visible-sm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mobile_menu">
+                            <nav id="mobile_menu_active">
+                                <ul>
+                                    <li><a href="index.html">主页</a></li>
+                                    <li><a href="shop.html">商城</a></li>
+                                    <li><a href="contact.html">联系我们</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- mobile-menu-area-end -->
+    </header>
+    <!-- header-end -->
+    <!-- slider-start -->
+    <div class="slider-container">
+        <div class="slider">
+            <!-- Slider Image -->
+            <div id="mainslider" class="nivoSlider slider-image">
+                <img src="img/slider/42.jpg" alt="main slider" title="#htmlcaption1" />
+                <img src="img/slider/41.jpg" alt="main slider" title="#htmlcaption2" />
+            </div>
+            <!-- Slider Caption 1 -->
+            <div id="htmlcaption1" class="nivo-html-caption slider-caption-1">
+                <div class="slider-progress"></div>
+                <div class="slide1-text slide-1 hidden-xs">
+                    <div class="middle-text">
+                        <div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
+                            <h1>The Best Fashion</h1>
+                        </div>
+                        <div class="cap-title wow bounceInRight" data-wow-duration="1.2s" data-wow-delay="0.2s">
+                            <h3>Save Your Time and Money</h3>
+                        </div>
+                        <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
+                            <a href="shop.html">购买</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slider Caption 2 -->
+            <div id="htmlcaption2" class="nivo-html-caption slider-caption-2">
+                <div class="slider-progress"></div>
+                <div class="slide1-text slide-2 hidden-xs">
+                    <div class="middle-text">
+                        <div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
+                            <h1>The Best Fashion</h1>
+                        </div>
+                        <div class="cap-title wow bounceInRight" data-wow-duration="1.2s" data-wow-delay="0.2s">
+                            <h3>Save Your Time and Money</h3>
+                        </div>
+                        <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
+                            <a href="shop.html">购买</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider-end -->
+    <!-- banner-area-start -->
+    <div class="banner-area hidden-sm hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <div class="single-banner wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                        <a href="shop.html">
+                                <img src="img/banner/banner1.jpg" alt="" />
+                            </a>
+                        <h3>服装新品</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <div class="single-banner wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                        <a href="shop.html">
+                                <img src="img/banner/banner2.jpg" alt="" />
+                            </a>
+                        <h3>女装</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <div class="single-banner wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                        <a href="shop.html">
+                                <img src="img/banner/banner3.jpg" alt="" />
+                            </a>
+                        <h3>男装</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner-area-end -->
+    <!-- feature-area-start -->
+    <div class="feature-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h3>店主推荐</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="feature-tab wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                        <ul class="my-tab">
+                            <li class="active"><a data-toggle="tab" href="#new">新品</a></li>
+                            <li><a data-toggle="tab" href="#men">男装</a></li>
+                            <li><a data-toggle="tab" href="#women">女装</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="new" class="tab-pane fade in active">
+                                <script id="new_list" type="text/template">
+                                    {{each list value i}}
+                                    <div class="col-md-12">
+                                        <div class="single-product">
+                                            <div class="single-product-img">
+                                                <a data-toggle="modal" data-id="{{value.id}}" data-target="#myModal" href="#"><img src="{{value.url}}" alt="" /></a>
+                                                <span class="sale-box">
+                                                    <span class="sale">Sale</span>
+                                                </span>
+                                                <span class="new-box">
+                                                    {{if value.isNew}}
+                                                        <span class="new">新品</span> {{/if}}
+                                                </span>
+                                            </div>
+                                            <div class="single-product-content">
+                                                <div class="product-title">
+                                                    <h5><a href="#">{{value.title}}</a></h5>
+                                                </div>
+                                                <div class="rating">
+                                                    <% for(var i = 1;i <= 5;i++){ %>
+                                                        <% if(i <= value.scoring){ %>
+                                                            <div class="star star-on"></div>
+                                                            <% }else{ %>
+                                                                <div class="star"></div>
+                                                                <% } %>
+                                                                    <% } %>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span class="price">￥{{value.price.toFixed(2)}}</span>
+                                                    <span class="old-price">￥{{value.originPrice.toFixed(2)}}</span>
+                                                </div>
+                                                <div class="product-action">
+                                                    <button data-id={{value.id}} class="btn btn-default add-cart" title="加入购物车">加入购物车</button>
+                                                    <a class="add-wishlist" href="#" title="收藏"><i class="fa fa-heart"></i></a>
+                                                    <a class="quick-view" href="#" title="搜索" data-toggle="modal" data-id="{{value.id}}" data-target="#myModal"><i class="fa fa-search"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </script>
+                                <div class="tab-carousel"></div>
+                            </div>
+                            <div id="men" class="tab-pane fade">
+                                <script id="men_list" type="text/template">
+                                    {{each list value i}}
+                                    <div class="col-md-12">
+                                        <div class="single-product">
+                                            <div class="single-product-img">
+                                                <a data-toggle="modal" data-id="{{value.id}}" data-target="#myModal" href="#"><img src="{{value.url}}" alt="" /></a>
+                                                <span class="sale-box">
+                                                    <span class="sale">Sale</span>
+                                                </span>
+                                                <span class="new-box">
+                                                    {{if value.isNew}}
+                                                        <span class="new">新品</span> {{/if}}
+                                                </span>
+                                            </div>
+                                            <div class="single-product-content">
+                                                <div class="product-title">
+                                                    <h5><a href="#">{{value.title}}</a></h5>
+                                                </div>
+                                                <div class="rating">
+                                                    <% for(var i = 1;i <= 5;i++){ %>
+                                                        <% if(i <= value.scoring){ %>
+                                                            <div class="star star-on"></div>
+                                                            <% }else{ %>
+                                                                <div class="star"></div>
+                                                                <% } %>
+                                                                    <% } %>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span class="price">￥{{value.price.toFixed(2)}}</span>
+                                                    <span class="old-price">￥{{value.originPrice.toFixed(2)}}</span>
+                                                </div>
+                                                <div class="product-action">
+                                                    <button data-id={{value.id}} class="btn btn-default add-cart" title="加入购物车">加入购物车</button>
+                                                    <a class="add-wishlist" href="#" title="收藏"><i class="fa fa-heart"></i></a>
+                                                    <a class="quick-view" href="#" title="搜索" data-id="{{value.id}}" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </script>
+                                <div class="tab-carousel"></div>
+                            </div>
+                            <div id="women" class="tab-pane fade">
+                                <script id="women_list" type="text/template">
+                                    {{each list value i}}
+                                    <div class="col-md-12">
+                                        <div class="single-product">
+                                            <div class="single-product-img">
+                                                <a data-toggle="modal" data-id="{{value.id}}" data-target="#myModal" href="#"><img src="{{value.url}}" alt="" /></a>
+                                                <span class="sale-box">
+                                                    <span class="sale">Sale</span>
+                                                </span>
+                                                <span class="new-box">
+                                                    {{if value.isNew}}
+                                                        <span class="new">新品</span> {{/if}}
+                                                </span>
+                                            </div>
+                                            <div class="single-product-content">
+                                                <div class="product-title">
+                                                    <h5><a href="#">{{value.title}}</a></h5>
+                                                </div>
+                                                <div class="rating">
+                                                    <% for(var i = 1;i <= 5;i++){ %>
+                                                        <% if(i <= value.scoring){ %>
+                                                            <div class="star star-on"></div>
+                                                            <% }else{ %>
+                                                                <div class="star"></div>
+                                                                <% } %>
+                                                                    <% } %>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span class="price">￥{{value.price.toFixed(2)}}</span>
+                                                    <span class="old-price">￥{{value.originPrice.toFixed(2)}}</span>
+                                                </div>
+                                                <div class="product-action">
+                                                    <button data-id={{value.id}} class="btn btn-default add-cart" title="加入购物车">加入购物车</button>
+                                                    <a class="add-wishlist" href="#" title="收藏"><i class="fa fa-heart"></i></a>
+                                                    <a class="quick-view" href="#" title="搜索" data-toggle="modal" data-id="{{value.id}}" data-target="#myModal"><i class="fa fa-search"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </script>
+                                <div class="tab-carousel"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- feature-area-end -->
+    <!-- best-seller-area-start -->
+    <div class="bestseller-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="best-seller-col wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                        <h3>热销产品</h3>
+                        <div id="hot" class="best-seller-content">
+                            <script id="hot_list" type="text/template">
+                                {{each list value i}}
+                                <div class="single-new-product">
+                                    <div class="product-img">
+                                        <a data-toggle="modal" data-id="{{value.id}}" data-target="#myModal" href="#"><img src="{{value.url}}" alt="" /></a>
+                                    </div>
+                                    <div class="product-details">
+                                        <div class="single-product-content">
+                                            <div class="product-title">
+                                                <h5><a href="#">{{value.title}}</a></h5>
+                                            </div>
+                                            <div class="rating">
+                                                <% for(var i = 1;i <= 5;i++){ %>
+                                                    <% if(i <= value.scoring){ %>
+                                                        <div class="star star-on"></div>
+                                                        <% }else{ %>
+                                                            <div class="star"></div>
+                                                            <% } %>
+                                                                <% } %>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price">￥{{value.price.toFixed(2)}}</span>
+                                                <span class="old-price">￥{{value.originPrice.toFixed(2)}}</span>
+                                            </div>
+                                            <div class="product-action">
+                                                <button data-id={{value.id}} class="btn btn-default add-cart" title="加入购物车">加入购物车</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="best-seller-col top-mar-xs wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                        <h3>浏览最多</h3>
+                        <div id="visit" class="best-seller-content">
+                            <script id="visit_list" type="text/template">
+                                {{each list value i}}
+                                <div class="single-new-product">
+                                    <div class="product-img">
+                                        <a data-toggle="modal" data-id="{{value.id}}" data-target="#myModal" href="#"><img src="{{value.url}}" alt="" /></a>
+                                    </div>
+                                    <div class="product-details">
+                                        <div class="single-product-content">
+                                            <div class="product-title">
+                                                <h5><a href="#">{{value.title}}</a></h5>
+                                            </div>
+                                            <div class="rating">
+                                                <% for(var i = 1;i <= 5;i++){ %>
+                                                    <% if(i <= value.scoring){ %>
+                                                        <div class="star star-on"></div>
+                                                        <% }else{ %>
+                                                            <div class="star"></div>
+                                                            <% } %>
+                                                                <% } %>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price">￥{{value.price.toFixed(2)}}</span>
+                                                <span class="old-price">￥{{value.originPrice.toFixed(2)}}</span>
+                                            </div>
+                                            <div class="product-action">
+                                                <button data-id={{value.id}} class="btn btn-default add-cart" title="加入购物车">加入购物车</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="best-seller-col top-mar-xs wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                        <h3>收藏最多</h3>
+                        <div id="collect" class="best-seller-content">
+                            <script id="collect_list" type="text/template">
+                                {{each list value i}}
+                                <div class="single-new-product">
+                                    <div class="product-img">
+                                        <a data-toggle="modal" data-id="{{value.id}}" data-target="#myModal" href="#"><img src="{{value.url}}" alt="" /></a>
+                                    </div>
+                                    <div class="product-details">
+                                        <div class="single-product-content">
+                                            <div class="product-title">
+                                                <h5><a href="#">{{value.title}}</a></h5>
+                                            </div>
+                                            <div class="rating">
+                                                <% for(var i = 1;i <= 5;i++){ %>
+                                                    <% if(i <= value.scoring){ %>
+                                                        <div class="star star-on"></div>
+                                                        <% }else{ %>
+                                                            <div class="star"></div>
+                                                            <% } %>
+                                                                <% } %>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price">￥{{value.price.toFixed(2)}}</span>
+                                                <span class="old-price">￥{{value.originPrice.toFixed(2)}}</span>
+                                            </div>
+                                            <div class="product-action">
+                                                <button data-id={{value.id}} class="btn btn-default add-cart" title="加入购物车">加入购物车</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- best-seller-area-end -->
+    <!-- banner-2-area-start -->
+    <div class="banner-2-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="single-banner wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                        <a href="shop.html"><img src="img/banner/11.jpg" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="single-banner wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                        <a href="shop.html"><img src="img/banner/12.jpg" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner-2-area-end -->
+    <!-- exclusive-area-start -->
+    <div class="exclusive-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-xs-12 hidden-sm wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                    <div class="best-seller">
+                        <div class="row">
+                            <script id="best_list" type="text/template">
+                                {{each list value i}}
+                                <div class="col-md-12">
+                                    <!-- single-product-start -->
+                                    <div class="single-product">
+                                        <div class="single-product-img">
+                                            <a data-toggle="modal" data-id="{{value.id}}" data-target="#myModal" href="#"><img src="{{value.url}}" alt="" /></a>
+                                            <span class="discount-box">{{value.best.disCount}}</span>
+                                        </div>
+                                        <div class="upcoming">
+                                            <span class="is-countdown"> </span>
+                                            <div data-countdown="{{value.best.timeEnd}}"></div>
+                                        </div>
+                                        <div class="single-product-content">
+                                            <div class="product-title">
+                                                <h5><a href="#">{{value.title}}</a></h5>
+                                            </div>
+                                            <div class="rating">
+                                                <div class="star star-on"></div>
+                                                <div class="star star-on"></div>
+                                                <div class="star star-on"></div>
+                                                <div class="star star-on"></div>
+                                                <div class="star"></div>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price">￥{{value.price.toFixed(2)}}</span>
+                                                <span class="old-price">￥{{value.originPrice.toFixed(2)}}</span>
+                                            </div>
+                                            <div class="product-action">
+                                                <button data-id={{value.id}} class="btn btn-default add-cart" title="加入购物车">加入购物车</button>
+                                                <a class="add-wishlist" href="#" title=""><i class="fa fa-heart"></i></a>
+                                                <a class="quick-view" href="#" title="搜索" data-toggle="modal" data-id="{{value.id}}" data-target="#myModal"><i class="fa fa-search"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- single-product-end -->
+                                </div>
+                                {{/each}}
+                            </script>
+                            <div id="best" class="best-carousel"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-xs-12 col-sm-12 wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="section-heading">
+                                <h3>独家产品</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="exclusive-product">
+                            <script id="exclusive_list" type="text/template">
+                                {{each list value i}}
+                                <div class="col-md-12">
+                                    <div class="single-product">
+                                        <div class="single-product-img">
+                                            <a data-toggle="modal" data-id="{{value.id}}" data-target="#myModal" href="#"><img src="{{value.url}}" alt="" /></a>
+                                            <span class="sale-box">
+                                                <span class="sale">Sale</span>
+                                            </span>
+                                            <span class="new-box">
+                                                {{if value.isNew}}
+                                                    <span class="new">新品</span> {{/if}}
+                                            </span>
+                                        </div>
+                                        <div class="single-product-content">
+                                            <div class="product-title">
+                                                <h5><a href="#">{{value.title}}</a></h5>
+                                            </div>
+                                            <div class="rating">
+                                                <% for(var i = 1;i <= 5;i++){ %>
+                                                    <% if(i <= value.scoring){ %>
+                                                        <div class="star star-on"></div>
+                                                        <% }else{ %>
+                                                            <div class="star"></div>
+                                                            <% } %>
+                                                                <% } %>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price">￥{{value.price.toFixed(2)}}</span>
+                                                <span class="old-price">￥{{value.originPrice.toFixed(2)}}</span>
+                                            </div>
+                                            <div class="product-action">
+                                                <button data-id={{value.id}} class="btn btn-default add-cart" title="加入购物车">加入购物车</button>
+                                                <a class="add-wishlist" href="#" title="收藏"><i class="fa fa-heart"></i></a>
+                                                <a class="quick-view" href="#" title="搜索" data-toggle="modal" data-id="{{value.id}}" data-target="#myModal"><i class="fa fa-search"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </script>
+                            <div id="exclusive" class="exclusive-carousel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- exclusive-area-end -->
+    <!-- news-letter-area-start -->
+    <div class="news-letter-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="subscribe-area wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                        <div class="subscribe-title">
+                            <h3><span>Subscribe</span>to our newsletter</h3>
+                            <p>订阅邮件,以便接收到最新的、最优惠的商品信息.
+                            </p>
+                            <form action="#">
+                                <div class="subscribe-form">
+                                    <input type="text" placeholder="你的邮件..." class="form-control search-form" />
+                                    <button>订阅</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- news-letter-area-end -->
+    <!-- service-area-start -->
+    <div class="service-area">
+        <div class="container">
+            <div class="row">
+                <div class="service wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                    <div class="col-md-3 col-xs-12 col-sm-3">
+                        <div class="single-service">
+                            <i class="fa fa-plane"></i>
+                            <h3>3件包邮</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-12 col-sm-3">
+                        <div class="single-service">
+                            <i class="fa fa-taxi"></i>
+                            <h3>支持货到付款</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-12 col-sm-3">
+                        <div class="single-service no-bor">
+                            <i class="fa fa-cc-visa"></i>
+                            <h3>安全支付</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-12 col-sm-3">
+                        <div class="single-service no-bor">
+                            <i class="fa fa-phone"></i>
+                            <h3>客服在线</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- service-area-end -->
+    <!-- brand-area-start -->
+    <div class="brand-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h3>我们的品牌</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="brands wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                    <div class="brand-carousel">
+                        <div class="col-md-12">
+                            <div class="single-brand">
+                                <a href="#"><img src="img/brand/1.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="single-brand">
+                                <a href="#"><img src="img/brand/1.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="single-brand">
+                                <a href="#"><img src="img/brand/1.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="single-brand">
+                                <a href="#"><img src="img/brand/1.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="single-brand">
+                                <a href="#"><img src="img/brand/1.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="single-brand">
+                                <a href="#"><img src="img/brand/1.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="single-brand">
+                                <a href="#"><img src="img/brand/1.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="single-brand">
+                                <a href="#"><img src="img/brand/1.png" alt="" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- brand-area-end -->
+    <!-- footer-start -->
+    <footer>
+        <div class="footer-area wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+            <div class="footer-middle">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                    <h4>信息</h4>
+                                    <ul class="toggle-footer">
+                                        <li><a title="Specials" href="#">特价</a></li>
+                                        <li><a title="New products" href="#">新产品</a></li>
+                                        <li><a title="Best sellers" href="#">热销产品</a></li>
+                                        <li><a title="Our stores" href="#">商城</a></li>
+                                        <li><a title="Contact us" href="#">联系我们</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                    <h4>我的账号</h4>
+                                    <ul class="toggle-footer">
+                                        <li><a title="My orders" href="#">我的订单</a></li>
+                                        <li><a title="My addresses" href="#">我的收货地址</a></li>
+                                        <li><a title="My personal info" href="#">我的个人信息</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                    <h4>分类</h4>
+                                    <ul class="toggle-footer">
+                                        <li><a title="My orders" href="#">男装</a></li>
+                                        <li><a title="My credit slips" href="#">女装</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3  col-sm-3 col-xs-12">
+                                    <h4>商店地址</h4>
+                                    <div class="footer-contact">
+                                        <p class="description">
+                                            广西省桂林市临桂区临桂镇桂康路金水湾-翠园雅筑竹景苑A2-4-6-A
+                                        </p>
+                                        <p class="address add">
+                                            <span>广西省桂林市临桂区临桂镇桂康路金水湾-翠园雅筑竹景苑A2-4-6-A</span>
+                                        </p>
+                                        <p class="phone add">
+                                            <span> QQ:1833317387</span>
+                                        </p>
+                                        <p class="email add">
+                                            <a href="#">1833317387@qq.com</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 address">
+                            Copyright &copy; 2018.偏爱商城 <a target="_blank" href="http://www.miibeian.gov.cn/" style="color: #fff">&nbsp;&nbsp;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer-end -->
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="product-details">
+                        <div class="container">
+                            <script id="modal_list" type="text/template">
+                                <div class="col-md-5 col-xs-12 col-sm-5">
+                                    <div class="picture-tab">
+                                        <ul class="pic-tabs">
+                                            {{each list.imgUrl value i}}
+                                            <li class="{{i == 0 ? active : ''}}">
+                                                <a data-toggle="tab" href="#pic{{i}}"><img src="{{value}}" alt="" /></a>
+                                            </li>
+                                            {{/each}}
+                                        </ul>
+                                        <div class="tab-content">
+                                            {{each list.imgUrl value i}}
+                                            <div id="pic{{i}}" class="tab-pane {{i == 0 ? 'fade in active' : 'fade'}}">
+                                                <!-- single-product-start -->
+                                                <div class="single-product">
+                                                    <div class="single-product-img">
+                                                        <a href="#"><img src="{{value}}" alt="" /></a>
+                                                        <span class="sale-box">
+                                                            <span class="sale">Sale</span>
+                                                        </span>
+                                                        <span class="new-box">
+                                                            {{if list.isNew}}
+                                                                <span class="new">New</span> {{/if}}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <!-- single-product-end -->
+                                            </div>
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-xs-12 col-sm-7">
+                                    <div class="product-details-info">
+                                        <h5 class="product-title">{{list.title}}</h5>
+                                        <div class="price-box">
+                                            <span class="price">￥{{list.price.toFixed(2)}}</span>
+                                            <span class="old-price">￥{{list.originPrice.toFixed(2)}}</span>
+                                        </div>
+                                        <div class="rating">
+                                            <% for(var i = 1;i <= 5;i++){ %>
+                                                <% if(i <= list.scoring){ %>
+                                                    <div class="star star-on"></div>
+                                                    <% }else{ %>
+                                                        <div class="star"></div>
+                                                        <% } %>
+                                                            <% } %>
+                                        </div>
+                                        <div class="short-description">
+                                            <p>
+                                            </p>
+                                        </div>
+                                        <div class="add-cart">
+                                            <p class="quantity cart-plus-minus">
+                                                <label>数量：</label>
+                                                <input type="text" value="1" />
+                                            </p>
+                                            <div class="shop-add-cart">
+                                                <button data-id={{list.id}}>加入购物车</button>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="size">
+                                            <a href="#">160/S</a>
+                                            <a href="#">170/M</a>
+                                            <a href="#">180/L</a>
+                                            <a href="#">185/XL</a>
+                                            <a href="#">190/XLL</a>
+                                        </div> -->
+                                        <div class="collect">
+                                            <label>收藏：</label>
+                                            <a class="add-wishlist" href="#" title="收藏"><i class="fa fa-heart"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </script>
+                            <div id="modal_content" class="row"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModalClearing" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="#">
+                        <div class="form-item">
+                            <label>请选择收货地址</label>
+                            <select class="form-control" name="address">
+                                <option value="广东省">广东省</option>
+                            </select>
+                            <select class="form-control" name="address">
+                                <option value="深圳市">深圳市</option>
+                            </select>
+                            <select class="form-control" name="address">
+                                <option value="南山区">南山区</option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label for="">详细地址</label>
+                            <input class="form-control" type="text">
+                        </div>
+                        <div class="form-item">
+                            <label for="">商品总价</label>
+                            <input id="total" class="form-control" value="￥" disabled type="text">
+                        </div>
+                        <div class="pay" class="form-item">
+                            <a class="wx" id="wx" href="pay.php">微信支付</a>
+                            <a class="zfb" href="#">支付宝支付</a>
+                        </div>
+<!--                         <div class="form-item">
+                            <a class="submit">确定</a>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal-end -->
+    <!-- all js here -->
+    <!-- jquery latest version -->
+    <script src="js/vendor/jquery-1.12.0.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- owl.carousel js -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- meanmenu js -->
+    <script src="js/jquery.meanmenu.js"></script>
+    <!-- countdown js -->
+    <script src="js/countdown.js"></script>
+    <!-- jquery.nivo.slider.pack js -->
+    <script src="js/jquery.nivo.slider.pack.js"></script>
+    <!-- jquery-ui.min.js -->
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- wow js -->
+    <script src="js/wow.min.js"></script>
+    <!-- plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- art-template.js -->
+    <script src="js/art-template.js"></script>
+    <!-- layer.js -->
+    <script src="js/layer/layer.js"></script>
+    <!-- main js -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
